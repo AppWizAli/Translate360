@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "347593126798",
+    "project_id": "translate360-f5680",
+    "storage_bucket": "translate360-f5680.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347593126798:android:d45e01664333e623c06adf",
+        "android_client_info": {
+          "package_name": "com.hiskytechs.translate360"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBts7pSSJPW8xtxfW6bxmsrlbGCkl_i1g8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
