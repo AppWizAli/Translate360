@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookmarks"
+        android:icon="@drawable/nav_icon2"
+        android:title="Bookmarks" />
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/nav_icon3"
+        android:title="History" />
+    <item
+        android:id="@+id/subscription"
+        android:icon="@drawable/nav_icon4"
+        android:title="Subscription" />
+    <item
+        android:id="@+id/updates"
+        android:icon="@drawable/nav_icon5"
+        android:title="Check Updates" />
+    <item
+        android:id="@+id/rateUs"
+        android:icon="@drawable/nav_icon6"
+        android:title="Rate Us" />
+    <item
+        android:id="@+id/moreApps"
+        android:icon="@drawable/nav_icon7"
+        android:title="More Apps (Ad)" />
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/nav_icon8"
+        android:title="Share App" />
+    <item
+        android:id="@+id/feedback"
+        android:icon="@drawable/nav_icon9"
+        android:title="Feedback" />
+    <item
+        android:id="@+id/privacy"
+        android:icon="@drawable/nav_icon10"
+        android:title="Privacy Policy" />
+    <item
+        android:id="@+id/language"
+        android:icon="@drawable/nav_icon11"
+        android:title="Language" />
+</menu>
