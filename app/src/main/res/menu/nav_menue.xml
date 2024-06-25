@@ -12,6 +12,7 @@
         android:id="@+id/subscription"
         android:icon="@drawable/nav_icon4"
         android:title="Subscription" />
+
     <item
         android:id="@+id/updates"
         android:icon="@drawable/nav_icon5"
