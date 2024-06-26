@@ -254,6 +254,7 @@
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 <androidx.cardview.widget.CardView
+    android:id="@+id/tvQuotes"
     android:layout_width="130dp"
     android:layout_height="130dp"
     android:layout_margin="10dp"

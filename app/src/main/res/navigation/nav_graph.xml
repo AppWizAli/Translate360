@@ -23,18 +23,20 @@
         <action
             android:id="@+id/action_homeFragment_to_textTranslateFragment"
             app:destination="@id/textTranslateFragment" />
+
         <action
-            android:id="@+id/action_homeFragment_to_bookMarkFragment"
-            app:destination="@id/bookMarkFragment" />
+            android:id="@+id/action_homeFragment_to_fragmentQuote"
+            app:destination="@id/fragmentQuote" />
     </fragment>
     <fragment
         android:id="@+id/textTranslateFragment"
         android:name="com.hiskytechs.translate360.Fragments.TextTranslateFragment"
         android:label="fragment_text_translate"
         tools:layout="@layout/fragment_text_translate" />
+
     <fragment
-        android:id="@+id/bookMarkFragment"
-        android:name="com.hiskytechs.translate360.BookMarkFragment"
-        android:label="fragment_book_mark"
-        tools:layout="@layout/fragment_book_mark" />
+        android:id="@+id/fragmentQuote"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentQuote"
+        android:label="fragment_quote"
+        tools:layout="@layout/fragment_quote" />
 </navigation>

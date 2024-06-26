@@ -38,6 +38,9 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.tvText.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_textTranslateFragment)
         }
+        binding.tvQuotes.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_fragmentQuote)
+        }
         return binding.root
     }
 
@@ -50,11 +53,7 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.bookmarks -> {
-                findNavController().navigate(R.id.action_homeFragment_to_bookMarkFragment)
-                Toast.makeText(requireActivity(), "dfdfssd", Toast.LENGTH_SHORT).show()
-            }
-
+            
         }
 
         binding.drawerLayout.closeDrawer(GravityCompat.START)
