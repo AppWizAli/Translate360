@@ -43,6 +43,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.wear.compose:compose-material:1.2.1")
+    implementation("androidx.activity:activity:1.9.0")
     //implementation("com.google.firebase:firebase-ml-vision:24.1.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
