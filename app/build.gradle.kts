@@ -39,6 +39,11 @@ android {
     }
 }
 dependencies {
+    //retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    // gson converter
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
