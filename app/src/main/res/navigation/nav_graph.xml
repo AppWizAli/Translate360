@@ -60,32 +60,32 @@
         tools:layout="@layout/fragment_quote" />
     <fragment
         android:id="@+id/fragmentBookMarks"
-        android:name="com.hiskytechs.translate360.FragmentBookMarks"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentBookMarks"
         android:label="fragment_book_marks"
         tools:layout="@layout/fragment_book_marks" />
     <fragment
         android:id="@+id/fragmentHistory"
-        android:name="com.hiskytechs.translate360.FragmentHistory"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentHistory"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/fragmentSubscription"
-        android:name="com.hiskytechs.translate360.FragmentSubscription"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentSubscription"
         android:label="fragment_subscription"
         tools:layout="@layout/fragment_subscription" />
     <fragment
         android:id="@+id/fragmentsCheckUpdates"
-        android:name="com.hiskytechs.translate360.FragmentsCheckUpdates"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentsCheckUpdates"
         android:label="fragment_fragments_check_updates"
         tools:layout="@layout/fragment_fragments_check_updates" />
     <fragment
         android:id="@+id/fragmentPrivacyPolicy"
-        android:name="com.hiskytechs.translate360.FragmentPrivacyPolicy"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentPrivacyPolicy"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
     <fragment
         android:id="@+id/fragmentLanguage"
-        android:name="com.hiskytechs.translate360.FragmentLanguage"
+        android:name="com.hiskytechs.translate360.Fragments.FragmentLanguage"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
 </navigation>

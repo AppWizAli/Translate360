@@ -4,12 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.mlkit.common.model.DownloadConditions
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.hiskytechs.translate360.ApiModels.ModelLanguage
 import com.hiskytechs.translate360.Interface.LangauageInterafce
 import com.hiskytechs.translate360.R
+import com.hiskytechs.translate360.databinding.FragmentTextTranslateBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,34 +25,96 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TextTranslateFragment : Fragment() {
 
+    private lateinit var binding: FragmentTextTranslateBinding
+    private lateinit var languageMap: Map<String, String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val retrofitBuilder= Retrofit.Builder()
-            .baseUrl("https://google-translate113.p.rapidapi.com/api/v1/translator/")
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_text_translate, container, false)
+
+        setupLanguageSpinners()
+
+        binding.tvEnglish.setOnClickListener {
+            val sourceLanguage = languageMap[binding.spinnerFrom.selectedItem.toString()]
+            val targetLanguage = languageMap[binding.spinnerTo.selectedItem.toString()]
+
+            if (sourceLanguage != null && targetLanguage != null) {
+                val options = TranslatorOptions.Builder()
+                    .setSourceLanguage(sourceLanguage)
+                    .setTargetLanguage(targetLanguage)
+                    .build()
+                val translator = Translation.getClient(options)
+
+                val conditions = DownloadConditions.Builder()
+                    .requireWifi()
+                    .build()
+                translator.downloadModelIfNeeded(conditions)
+                    .addOnSuccessListener {
+                        translateText(translator)
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(requireContext(), "Failed to download model: ${exception.message}", Toast.LENGTH_LONG).show()
+                    }
+            } else {
+                Toast.makeText(requireContext(), "Please select valid languages", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return binding.root
+    }
+
+    private fun setupLanguageSpinners() {
+        val retrofitBuilder = Retrofit.Builder()
+            .baseUrl("https://google-translate113.p.rapidapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(LangauageInterafce::class.java)
 
-
-
-        val retrofitData=retrofitBuilder.getData()
+        val retrofitData = retrofitBuilder.getData()
 
         retrofitData.enqueue(object : Callback<ModelLanguage> {
             override fun onResponse(call: Call<ModelLanguage>, response: Response<ModelLanguage>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val languages = response.body()!!
+                    languageMap = languages.associate {
+                        val languageCode = TranslateLanguage.fromLanguageTag(it.code) ?: it.code
+                        it.language to languageCode
+                    }
 
-                var result=response.body()?.get(0)!!
-
-                Toast.makeText(requireActivity(), "Succcess", Toast.LENGTH_SHORT).show()
+                    val adapter = ArrayAdapter(
+                        requireContext(),
+                        R.layout.spinner_item,
+                        languageMap.keys.toList()
+                    )
+                    adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+                    binding.spinnerFrom.adapter = adapter
+                    binding.spinnerTo.adapter = adapter
+                    Toast.makeText(requireActivity(), "Languages loaded successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireActivity(), "Failed to load languages", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onFailure(call: Call<ModelLanguage>, t: Throwable) {
-                Toast.makeText(requireActivity(), "Faiilure", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), "Failure: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-
-        return inflater.inflate(R.layout.fragment_text_translate, container, false)
     }
 
+    private fun translateText(translator: Translator) {
+        val textToTranslate = binding.fromTextTranslate.text.toString()
+        if (textToTranslate.isNotEmpty()) {
+            translator.translate(textToTranslate)
+                .addOnSuccessListener { translatedText ->
+                    binding.tvTranslatedText.text = translatedText
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(requireContext(), "Translation failed: ${exception.message}", Toast.LENGTH_LONG).show()
+                }
+        } else {
+            Toast.makeText(requireContext(), "Please enter text to translate", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
