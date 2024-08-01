@@ -29,6 +29,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvQuote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Think a hundred times before you take a decision, but once that decision is taken, stand by it as one man."
@@ -41,7 +42,8 @@
             android:padding="10dp"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="230dp"
+                android:id="@+id/tvAuthor"
+                android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:text="Muhammad Ali Jinnah         "
                 android:textColor="@android:color/black"
@@ -50,16 +52,20 @@
                 android:gravity="center_vertical"/>
 
             <ImageButton
-                android:layout_width="wrap_content"
+                android:id="@+id/imgFavorite"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:paddingEnd="30dp"
+                android:paddingHorizontal="25dp"
                 android:src="@drawable/baseline_star_24"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
             <ImageButton
-                android:layout_width="wrap_content"
+                android:id="@+id/imgCopy"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:paddingEnd="30dp"
+                android:paddingHorizontal="25dp"
                 android:src="@drawable/baseline_content_copy_24"
             android:background="?attr/selectableItemBackgroundBorderless"
          />

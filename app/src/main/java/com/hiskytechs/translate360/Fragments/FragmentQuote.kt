@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.hiskytechs.translate360.Adapters.AdapterQuotes
 import com.hiskytechs.translate360.ApiModels.ModelQuotes
 import com.hiskytechs.translate360.ApiModels.RetrofitBuilder
 import com.hiskytechs.translate360.Interface.QuotesInterface
@@ -17,14 +19,19 @@ import retrofit2.Response
 
 class FragmentQuote : Fragment() {
 
-    private lateinit var quoteTextView: TextView
+    private lateinit var quoteRecyclerView: RecyclerView
+    private lateinit var quoteAdapter: AdapterQuotes
+    private var quotesList: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_quote, container, false)
-        quoteTextView = view.findViewById(R.id.tvHeloooQuotes)
+        quoteRecyclerView = view.findViewById(R.id.rvQuotes)
+        quoteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        quoteAdapter = AdapterQuotes(requireContext(), quotesList)
+        quoteRecyclerView.adapter = quoteAdapter
         fetchQuotes("Albert-Einstein")
         return view
     }
@@ -38,17 +45,19 @@ class FragmentQuote : Fragment() {
                 if (response.isSuccessful) {
                     val quotes = response.body()
                     if (quotes != null) {
-                        quoteTextView.text = quotes.joinToString("\n\n")
+                        quotesList.clear()
+                        quotesList.addAll(quotes)
+                        quoteAdapter.notifyDataSetChanged()
                     } else {
-                        quoteTextView.text = "No quotes found."
+                        quotesList.clear()
+                        quoteAdapter.notifyDataSetChanged()
                     }
                 } else {
-                    quoteTextView.text = "Failed to load quotes: ${response.errorBody()?.string()}"
+                    Log.e("FragmentQuote", "Failed to load quotes: ${response.errorBody()?.string()}")
                 }
             }
 
             override fun onFailure(call: Call<ModelQuotes>, t: Throwable) {
-                quoteTextView.text = "Failed to load quotes."
                 Log.e("FragmentQuote", "Error fetching quotes", t)
             }
         })
