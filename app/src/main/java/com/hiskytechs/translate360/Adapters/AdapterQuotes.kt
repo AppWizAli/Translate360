@@ -33,7 +33,11 @@ class AdapterQuotes(val context: Context, var quotesList: List<String>) : Recycl
             // Optionally, show a toast to notify the user
             Toast.makeText(context, "Quote copied to clipboard", Toast.LENGTH_SHORT).show()
         }
-        holder.binding.img
+        holder.binding.imgFavorite.setOnClickListener()
+        {
+            Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
+
+        }
     }
 
 
