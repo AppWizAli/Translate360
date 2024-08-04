@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.hiskytechs.translate360.ApiModels.ModelQuotes
 import com.hiskytechs.translate360.databinding.QuoteitemBinding
 
 class AdapterQuotes(val context: Context, var quotesList: List<String>) : RecyclerView.Adapter<AdapterQuotes.MyViewHolder>() {

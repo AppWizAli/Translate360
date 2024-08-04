@@ -1,6 +1,8 @@
 package com.hiskytechs.translate360.Fragments
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +24,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
-class TextTranslateFragment : Fragment() {
+class TextTranslateFragment : Fragment(), TextToSpeech.OnInitListener {
 
     private lateinit var binding: FragmentTextTranslateBinding
     private lateinit var languageMap: Map<String, String>
+    private var tts: TextToSpeech? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,14 @@ class TextTranslateFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_text_translate, container, false)
 
         setupLanguageSpinners()
+
+        // Initialize TextToSpeech
+        tts = TextToSpeech(requireContext(), this)
+
+        // Set up Speak button
+        binding.ivsoundFrom.setOnClickListener {
+            speakOut()
+        }
 
         binding.tvEnglish.setOnClickListener {
             val sourceLanguage = languageMap[binding.spinnerFrom.selectedItem.toString()]
@@ -63,6 +75,31 @@ class TextTranslateFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val result = tts!!.setLanguage(Locale.US)
+
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language not supported!")
+            } else {
+                binding.ivsoundFrom.isEnabled = true
+            }
+        }
+    }
+
+    private fun speakOut() {
+        val text = binding.fromTextTranslate.text.toString()
+        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
+    override fun onDestroy() {
+        if (tts != null) {
+            tts!!.stop()
+            tts!!.shutdown()
+        }
+        super.onDestroy()
     }
 
     private fun setupLanguageSpinners() {
