@@ -30,6 +30,15 @@ class HomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedListener
         binding.tvQuotes.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentQuote)
         }
+         binding.tvDictionary.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_dictionaryFragment)
+        }
+ binding.tvVoice.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_voiceFragment)
+        }
+
+
+
         binding.navigationView.setNavigationItemSelectedListener(this)
 
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {

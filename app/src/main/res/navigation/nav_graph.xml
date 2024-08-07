@@ -25,6 +25,9 @@
             android:id="@+id/action_homeFragment_to_textTranslateFragment"
             app:destination="@id/textTranslateFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_dictionaryFragment"
+            app:destination="@id/dictionaryFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_fragmentQuote"
             app:destination="@id/fragmentQuote" />
         <action
@@ -45,6 +48,9 @@
         <action
             android:id="@+id/action_homeFragment_to_fragmentLanguage"
             app:destination="@id/fragmentLanguage" />
+        <action
+            android:id="@+id/action_homeFragment_to_voiceFragment"
+            app:destination="@id/voiceFragment" />
     </fragment>
 
     <fragment
@@ -88,4 +94,14 @@
         android:name="com.hiskytechs.translate360.Fragments.FragmentLanguage"
         android:label="fragment_language"
         tools:layout="@layout/fragment_language" />
+    <fragment
+        android:id="@+id/dictionaryFragment"
+        android:name="com.hiskytechs.translate360.Fragments.DictionaryFragment"
+        android:label="DictionaryFragment"
+        tools:layout="@layout/fragment_dictionary"/>
+    <fragment
+        android:id="@+id/voiceFragment"
+        android:name="com.hiskytechs.translate360.Fragments.VoiceFragment"
+        android:label="fragment_voice"
+        tools:layout="@layout/fragment_voice" />
 </navigation>
